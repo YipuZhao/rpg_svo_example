@@ -35,6 +35,21 @@ void SvoNodeBase::run()
 {
   ros::spin();
   SVO_INFO_STREAM("SVO quit");
+
+  //
+      // Added by Yipu
+  std::cout << "terminated! saving the time cost log!" << std::endl;
+  svo_interface_.saveTimeLog("/home/yipuzhao/svo_install_overlay_ws/tmpLog.txt");
+  std::cout << "move on saving the track log!" << std::endl;
+  svo_interface_.saveAllFrameTrack("/home/yipuzhao/svo_install_overlay_ws/tmpTrack.txt");
+  
+  //
+  #ifdef LOGGING_LMK_LIFE
+  std::cout << "move on saving the lmk log!" << std::endl;
+  svo_interface_.saveLmkLog("/home/yipuzhao/svo_install_overlay_ws/tmpLog_lmk.txt");
+#endif
+  //
+  
   svo_interface_.quit_ = true;
   SVO_INFO_STREAM("SVO terminated.\n");
 }

@@ -30,6 +30,20 @@ namespace svo {
 // forward declarations
 class FrameHandlerBase;
 
+
+class lmkLog {
+public:
+  lmkLog(const int &id_, const int &life_) {
+    id = id_;
+    life = life_;
+  }
+  
+  int id;
+  int life;
+
+};
+
+
 /// Publish visualisation messages to ROS.
 class Visualizer
 {
@@ -57,6 +71,8 @@ public:
   std::vector<ros::Publisher> pub_dense_;
   std::vector<image_transport::Publisher> pub_images_;
   ros::Publisher pub_loop_closure_;
+  //
+  ros::Publisher pub_msf_poses_;
 
   tf::TransformBroadcaster br_;
   bool publish_world_in_cam_frame_;
@@ -68,6 +84,10 @@ public:
   double vis_scale_;
   std::ofstream ofs_states_;
   std::ofstream ofs_pointcloud_;
+  
+  //
+  std::vector<lmkLog> logLmkLife;
+  //
 
   Visualizer(const std::string& trace_dir,
              const ros::NodeHandle& nh_private,
@@ -163,6 +183,11 @@ public:
   void publishSeedsUncertainty(const MapPtr &map);
 
   void visualizeCoordinateFrames(const Transformation& T_world_cam);
+  
+  
+  void grabAllLmkLog(const MapPtr& map);
+  
+  
 };
 
 } // end namespace svo

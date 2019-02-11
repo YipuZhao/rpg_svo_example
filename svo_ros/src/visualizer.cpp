@@ -74,8 +74,11 @@ Visualizer::Visualizer(
   {
     pub_dense_.at(i) = pnh_.advertise<svo_msgs::DenseInputWithFeatures>("dense_input/"+std::to_string(i), 2);
     pub_images_.at(i) = it.advertise("image/"+std::to_string(i), 10);
-    pub_cam_poses_.at(i) = pnh_.advertise<geometry_msgs::PoseStamped>("pose_cam/"+std::to_string(i), 10);
+  //  pub_cam_poses_.at(i) = pnh_.advertise<geometry_msgs::PoseStamped>("pose_cam/"+std::to_string(i), 10);
+    pub_cam_poses_.at(i) = pnh_.advertise<geometry_msgs::PoseWithCovarianceStamped>("pose_cam/"+std::to_string(i), 10);
   }
+  pub_msf_poses_ = pnh_.advertise<geometry_msgs::PoseWithCovarianceStamped>("pose_cam_for_msf", 10);
+
   pub_loop_closure_ = pnh_.advertise<visualization_msgs::Marker>(
       "loop_closures", 10);
 
@@ -143,6 +146,43 @@ void Visualizer::publishCameraPoses(
         frame_bundle->at(0)->T_cam_world(), ros::Time().fromNSec(timestamp_nanoseconds),
         "cam_pos", kWorldFrame, br_);
 
+
+// publish msf pose 
+ //     ROS_INFO_STREAM("Start publishing msf pose at time " << timestamp_nanoseconds);
+
+      // tf::Matrix3x3 Ric( 0,  0,  1,
+      //                    -1,  0,  0,
+      //                    0,  -1,  0);
+      // tf::Matrix3x3 Ric( 0,  -1,  0,
+      //                    1,  0,  0,
+      //                    0,  0,  1);
+            tf::Matrix3x3 Ric( 1,  0,  0,
+                         0,  1,  0,
+                         0,  0,  1);
+      Eigen::Quaterniond qq = frame_bundle->at(0)->T_world_cam().getRotation().toImplementation();
+      Eigen::Vector3d pp = frame_bundle->at(0)->T_world_cam().getPosition();
+      tf::Quaternion quat ( tfScalar(qq.x()), tfScalar(qq.y()), tfScalar(qq.z()), tfScalar(qq.w()));
+      tf::Transform tfTiw ( Ric * tf::Matrix3x3( quat ), Ric * tf::Vector3( tfScalar(pp[0]), tfScalar(pp[1]), tfScalar(pp[2]) ) );
+
+        geometry_msgs::Transform gmTwi;
+        tf::transformTFToMsg(tfTiw, gmTwi);
+        
+        geometry_msgs::Pose camera_pose_in_imu;
+        camera_pose_in_imu.position.x = gmTwi.translation.x;
+        camera_pose_in_imu.position.y = gmTwi.translation.y;
+        camera_pose_in_imu.position.z = gmTwi.translation.z;
+        camera_pose_in_imu.orientation = gmTwi.rotation;
+    
+        geometry_msgs::PoseWithCovarianceStamped camera_odom_in_imu;
+        camera_odom_in_imu.header.seq = trace_id_;
+        camera_odom_in_imu.header.stamp = ros::Time().fromNSec(timestamp_nanoseconds);
+        camera_odom_in_imu.header.frame_id = "map";
+        camera_odom_in_imu.pose.pose = camera_pose_in_imu;
+    
+        pub_msf_poses_.publish(camera_odom_in_imu);
+//
+
+
   for(size_t i = 0; i < frame_bundle->size(); ++i)
   {
     if(pub_cam_poses_.at(i).getNumSubscribers() == 0)
@@ -151,19 +191,24 @@ void Visualizer::publishCameraPoses(
 
     Eigen::Quaterniond q = frame_bundle->at(i)->T_world_cam().getRotation().toImplementation();
     Eigen::Vector3d p = frame_bundle->at(i)->T_world_cam().getPosition();
-    geometry_msgs::PoseStampedPtr msg_pose(new geometry_msgs::PoseStamped);
+    // geometry_msgs::PoseStampedPtr msg_pose(new geometry_msgs::PoseStamped);
+    geometry_msgs::PoseWithCovarianceStampedPtr msg_pose(new geometry_msgs::PoseWithCovarianceStamped);
     msg_pose->header.seq = trace_id_;
     msg_pose->header.stamp = ros::Time().fromNSec(timestamp_nanoseconds);
     msg_pose->header.frame_id = "/cam"+std::to_string(i);
-    msg_pose->pose.position.x = p[0];
-    msg_pose->pose.position.y = p[1];
-    msg_pose->pose.position.z = p[2];
-    msg_pose->pose.orientation.x = q.x();
-    msg_pose->pose.orientation.y = q.y();
-    msg_pose->pose.orientation.z = q.z();
-    msg_pose->pose.orientation.w = q.w();
+    msg_pose->pose.pose.position.x = p[0];
+    msg_pose->pose.pose.position.y = p[1];
+    msg_pose->pose.pose.position.z = p[2];
+    msg_pose->pose.pose.orientation.x = q.x();
+    msg_pose->pose.pose.orientation.y = q.y();
+    msg_pose->pose.pose.orientation.z = q.z();
+    msg_pose->pose.pose.orientation.w = q.w();
     pub_cam_poses_.at(i).publish(msg_pose);
+
+// ROS_INFO_STREAM("Done with publishing cam pose " << i);
+
   }
+
 }
 
 void Visualizer::publishBundleFeatureTracks(
@@ -728,5 +773,28 @@ void Visualizer::visualizeCoordinateFrames(const Transformation& T_world_cam)
         pub_markers_, Matrix3d::Identity(), Vector3d::Zero(),
         kWorldFrame, ros::Time::now(), 0, 0, 0.2);
 }
+
+
+void Visualizer::grabAllLmkLog(const MapPtr& map)
+{
+  // const MapPtr& map = svo_->map();
+  for(auto kf : map->keyframes_)
+  {
+    const FramePtr& frame = kf.second;
+    for(size_t i = 0; i < frame->num_features_; ++i)
+    {
+      if(frame->landmark_vec_.at(i) != nullptr)
+      {
+	size_t N = frame->landmark_vec_.at(i)->obs_.size();
+	if (N == 0)
+	  continue ;
+        size_t id = frame->landmark_vec_.at(i)->id_;
+	size_t life = frame->landmark_vec_.at(i)->obs_[N-1].frame_id - frame->landmark_vec_.at(i)->obs_[0].frame_id + 1;
+        logLmkLife.push_back(lmkLog(id, life));
+      }
+    }
+  }
+}
+
 
 } // end namespace svo
