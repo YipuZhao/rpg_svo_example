@@ -123,7 +123,7 @@ void SvoInterface::publishResults(
 #ifdef LOGGING_LMK_LIFE
       // Added by Yipu
       if(svo_->getLastFrames()->isKeyframe())
-	visualizer_->grabAllLmkLog(svo_->map());
+	       visualizer_->grabAllLmkLog(svo_->map());
 #endif
       
       break;
