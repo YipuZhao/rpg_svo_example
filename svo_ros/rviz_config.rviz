@@ -53,79 +53,7 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        base_footprint:
-          Value: true
-        base_link:
-          Value: true
         cam_pos:
-          Value: true
-        camera_left_frame:
-          Value: true
-        camera_left_optical_frame:
-          Value: true
-        camera_link_1:
-          Value: true
-        camera_right_frame:
-          Value: true
-        camera_right_optical_frame:
-          Value: true
-        caster_back_link:
-          Value: true
-        caster_front_link:
-          Value: true
-        cliff_sensor_front_link:
-          Value: true
-        cliff_sensor_left_link:
-          Value: true
-        cliff_sensor_right_link:
-          Value: true
-        gyro_link:
-          Value: true
-        map:
-          Value: true
-        odom:
-          Value: true
-        plate_bottom_link:
-          Value: true
-        plate_middle_link:
-          Value: true
-        plate_top_link:
-          Value: true
-        pole_bottom_0_link:
-          Value: true
-        pole_bottom_1_link:
-          Value: true
-        pole_bottom_2_link:
-          Value: true
-        pole_bottom_3_link:
-          Value: true
-        pole_bottom_4_link:
-          Value: true
-        pole_bottom_5_link:
-          Value: true
-        pole_kinect_0_link:
-          Value: true
-        pole_kinect_1_link:
-          Value: true
-        pole_middle_0_link:
-          Value: true
-        pole_middle_1_link:
-          Value: true
-        pole_middle_2_link:
-          Value: true
-        pole_middle_3_link:
-          Value: true
-        pole_top_0_link:
-          Value: true
-        pole_top_1_link:
-          Value: true
-        pole_top_2_link:
-          Value: true
-        pole_top_3_link:
-          Value: true
-        wheel_left_link:
-          Value: true
-        wheel_right_link:
           Value: true
         world:
           Value: true
@@ -244,26 +172,26 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 7.03049994
+      Class: rviz/ThirdPersonFollower
+      Distance: 9.43632221
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.583405018
-        Y: 0.297881991
-        Z: -0.138986006
-      Focal Shape Fixed Size: true
+        X: 0.449531198
+        Y: 2.39272642
+        Z: 0
+      Focal Shape Fixed Size: false
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.414795995
-      Target Frame: <Fixed Frame>
-      Value: Orbit (rviz)
-      Yaw: 4.51356983
+      Pitch: -1.24479663
+      Target Frame: cam_pos
+      Value: ThirdPersonFollower (rviz)
+      Yaw: 4.32540655
     Saved: ~
 Window Geometry:
   /remode/depth:
