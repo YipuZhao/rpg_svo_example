@@ -12,7 +12,7 @@ SeqNameList = ['MH_01_easy', 'V2_02_medium', 'MH_05_difficult'];
 
 Result_root = '/mnt/DATA/tmp/EuRoC/svo_Stereo_Speedx1/'
 
-Number_GF_List = [400]; # [200, 300, 400]; # [400, 600, 800, 1000, 1500, 2000]; # 
+Number_GF_List = [400, 600, 800, 1000, 1500, 2000]; # [400]; # [200, 300, 400]; # 
 
 rate = 1.0;
 
