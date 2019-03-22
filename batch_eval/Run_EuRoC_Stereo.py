@@ -6,15 +6,19 @@ import time
 import signal
 
 # SeqNameList = ['MH_01_easy'];
-# SeqNameList = ['V1_03_difficult', 'V2_02_medium', 'V2_03_difficult'];
-SeqNameList = ['MH_01_easy', 'MH_02_easy', 'MH_03_medium', 'MH_04_difficult', 'MH_05_difficult', 'V1_01_easy', 'V1_02_medium', 'V1_03_difficult', 'V2_01_easy', 'V2_02_medium', 'V2_03_difficult'];
+SeqNameList = ['MH_01_easy', 'V2_02_medium', 'MH_05_difficult'];
+# SeqNameList = ['MH_01_easy', 'MH_02_easy', 'MH_03_medium', 'MH_04_difficult', 'MH_05_difficult', 'V1_01_easy', 'V1_02_medium', 'V1_03_difficult', 'V2_01_easy', 'V2_02_medium', 'V2_03_difficult'];
 # SeqNameList = ['V1_01_easy', 'V1_02_medium', 'V1_03_difficult', 'V2_01_easy', 'V2_02_medium', 'V2_03_difficult', 'V1_01_easy_blur_5', 'V1_02_medium_blur_5', 'V1_03_difficult_blur_5', 'V2_01_easy_blur_5', 'V2_02_medium_blur_5', 'V2_03_difficult_blur_5'];
 
-Number_GF_List = [400]; # [200, 300, 400]; # [400, 600, 800, 1000, 1500, 2000]; # 
-Result_root = '/mnt/DATA/tmp/EuRoC/SVO2_Stereo_Baseline/'
+Result_root = '/mnt/DATA/tmp/EuRoC/svo_Stereo_Speedx1/'
 
-Num_Repeating = 1 # 10 # 20 #  5 # 
-SleepTime = 5
+Number_GF_List = [400]; # [200, 300, 400]; # [400, 600, 800, 1000, 1500, 2000]; # 
+
+rate = 1.0;
+
+Num_Repeating = 10 # 20 # 1 # 
+
+SleepTime = 2
 
 #----------------------------------------------------------------------------------------------------------------------
 class bcolors:
@@ -49,13 +53,14 @@ for ri, num_gf in enumerate(Number_GF_List):
             # File_rosbag  = '/home/turtlebot/DATA/EuRoC_dataset/BagFiles/' + SeqName + '.bag'
 
             # rosrun ORB_SLAM2 Mono PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
-            cmd_slam   = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros ' + 'euroc_stereo_lmk' + str(int(num_gf)) + '.launch')
+            cmd_slam     = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros ' \
+                + 'euroc_stereo_only.launch num_tracks_per_frame:=' + str(int(num_gf)))
             # cmd_record = str('rosbag record -O ' + Experiment_dir + '/' + SeqName + '_tf /tf __name:=rec_bag')
-            cmd_lmklog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpLog_lmk.txt ' + Experiment_dir + '/' + SeqName + '_Log_lmk.txt')
-            cmd_timelog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
-            cmd_tracklog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
+            cmd_lmklog   = str('cp /mnt/DATA/svo_tmpLog_lmk.txt ' + Experiment_dir + '/' + SeqName + '_Log_lmk.txt')
+            cmd_timelog  = str('cp /mnt/DATA/svo_tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
+            cmd_tracklog = str('cp /mnt/DATA/svo_tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
             # cmd_timelog = str('cp /home/turtlebot/svo_install_overlay_ws/tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
-            cmd_rosbag = 'rosbag play ' + File_rosbag + ' -r 0.5' # + ' -u 30' # 
+            cmd_rosbag = 'rosbag play ' + File_rosbag + ' -r ' + str(rate) # + ' -u 30' # 
             print bcolors.WARNING + "cmd_slam: \n"   + cmd_slam   + bcolors.ENDC
             # print bcolors.WARNING + "cmd_record: \n" + cmd_record + bcolors.ENDC
             print bcolors.WARNING + "cmd_lmklog: \n" + cmd_lmklog + bcolors.ENDC

@@ -41,13 +41,24 @@ class timeLog {
 public:
   timeLog(const double &t0, const double &t1, const double &t2) {
     time_stamp = t0;
-    time_cost_1 = t1;
-    time_cost_2 = t2;
+    time_proc = t1;
+    time_total = t2;
+  };
+  
+  timeLog(const double &t0, const double &t1, const double &t2, const size_t &n1, const size_t &n2) {
+    time_stamp = t0;
+    time_proc = t1;
+    time_total = t2;
+    num_poses = n1;
+    num_lmks = n2;
   };
 
   double time_stamp;
-  double time_cost_1;
-  double time_cost_2;
+  double time_proc;
+  double time_total;
+  //
+  size_t num_poses;
+  size_t num_lmks;
 };
 
 class trackLog {

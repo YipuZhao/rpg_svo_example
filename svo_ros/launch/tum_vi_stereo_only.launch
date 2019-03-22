@@ -7,12 +7,12 @@
     <param name="imu_topic" value="/imu_null" type="str" />
     <param name="calib_file" value="$(find svo_ros)/calib/TUM_VI_stereo_calib.yaml" type="str" />
 
-    <rosparam file="$(find svo_ros)/param/pinhole_stereo_lmk2000.yaml" />
+    <rosparam file="$(find svo_ros)/param/pinhole_stereo_lmk$(arg num_tracks_per_frame).yaml" />
     <rosparam file="$(find svo_ros)/param/euroc_stereo_imu.yaml" />
 
   </node>
 
-  <!-- RVIZ + SVO GUI
+  <!-- RVIZ + SVO GUI 
   <node name="vis" pkg="rviz" type="rviz" args=" -d $(find svo_ros)/rviz_config.rviz" />
    -->
 

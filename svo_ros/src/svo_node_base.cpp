@@ -39,14 +39,14 @@ void SvoNodeBase::run()
   //
       // Added by Yipu
   std::cout << "terminated! saving the time cost log!" << std::endl;
-  svo_interface_.saveTimeLog("/home/yipuzhao/svo_install_overlay_ws/tmpLog.txt");
+  svo_interface_.saveTimeLog("/mnt/DATA/svo_tmpLog.txt");
   std::cout << "move on saving the track log!" << std::endl;
-  svo_interface_.saveAllFrameTrack("/home/yipuzhao/svo_install_overlay_ws/tmpTrack.txt");
+  svo_interface_.saveAllFrameTrack("/mnt/DATA/svo_tmpTrack.txt");
   
   //
-  #ifdef LOGGING_LMK_LIFE
+#ifdef LOGGING_LMK_LIFE
   std::cout << "move on saving the lmk log!" << std::endl;
-  svo_interface_.saveLmkLog("/home/yipuzhao/svo_install_overlay_ws/tmpLog_lmk.txt");
+  svo_interface_.saveLmkLog("/mnt/DATA/svo_tmpLog_lmk.txt");
 #endif
   //
   

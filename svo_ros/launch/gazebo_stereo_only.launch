@@ -7,9 +7,9 @@
     <param name="imu_topic" value="null" type="str" />
     <param name="calib_file" value="$(find svo_ros)/calib/pinhole_stereo_calib.yaml" type="str" />
 
-    <rosparam file="$(find svo_ros)/param/pinhole_stereo_imu_lmk1200.yaml" />
+    <rosparam file="$(find svo_ros)/param/pinhole_stereo_lmk$(arg num_tracks_per_frame).yaml" />
     <rosparam file="$(find svo_ros)/param/gazebo_stereo_imu.yaml" />
 
   </node>
-
+   
 </launch>

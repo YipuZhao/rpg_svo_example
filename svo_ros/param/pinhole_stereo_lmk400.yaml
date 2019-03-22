@@ -77,7 +77,7 @@ img_align_max_level: 4 # Increase this level by one if the image is double the w
 img_align_min_level: 2
 
 # Reprojection
-use_async_reprojectors: False # For stereo, change it to True for multithreading.
+use_async_reprojectors: True # For stereo, change it to True for multithreading.
 reprojector_max_n_kfs: 5 # Local map size. Larger is computationally more intensive. More reduces drift.
 scan_epi_unit_sphere: False # for wide angle lens, set it to True.
 
