@@ -13,7 +13,7 @@ SeqNameList = ['MH_01_easy', 'V2_02_medium', 'MH_05_difficult'];
 Result_root = '/mnt/DATA/tmp/EuRoC/svo_Stereo_Speedx1/'
 
 # Number_GF_List = [400, 600, 800, 1000, 1500, 2000]; # [400]; # [200, 300, 400]; # 
-Number_GF_List = [150, 200, 400, 600, 800, 1000]; 
+Number_GF_List = [600] # [150, 200, 400, 600, 800, 1000]; 
 
 rate = 1.0;
 
@@ -54,7 +54,7 @@ for ri, num_gf in enumerate(Number_GF_List):
             # File_rosbag  = '/home/turtlebot/DATA/EuRoC_dataset/BagFiles/' + SeqName + '.bag'
 
             # rosrun ORB_SLAM2 Mono PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
-            cmd_slam     = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros ' \
+            cmd_slam     = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.0 roslaunch svo_ros ' \
                 + 'euroc_stereo_only.launch num_tracks_per_frame:=' + str(int(num_gf)))
             # cmd_record = str('rosbag record -O ' + Experiment_dir + '/' + SeqName + '_tf /tf __name:=rec_bag')
             cmd_lmklog   = str('cp /mnt/DATA/svo_tmpLog_lmk.txt ' + Experiment_dir + '/' + SeqName + '_Log_lmk.txt')
