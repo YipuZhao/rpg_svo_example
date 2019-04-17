@@ -10,7 +10,7 @@ SeqConfigPre = ['00_02', '00_02', '04_12', '04_12']
 
 Result_root = '/mnt/DATA/tmp/KITTI/SVO2_Stereo_Baseline/'
 
-Number_GF_List = [400, 600, 800, 1000, 1500, 2000]; # [400]; # 
+Number_GF_List = [800]; # [400, 600, 800, 1000, 1500, 2000]; # 
 
 Num_Repeating = 10 # 20 #  5 # 
 SleepTime = 5
@@ -33,7 +33,7 @@ for ri, num_gf in enumerate(Number_GF_List):
     for iteration in range(0, Num_Repeating):
 
         Experiment_dir = Result_root + Experiment_prefix + '_Round' + str(iteration + 1)
-        cmd_mkdir = 'mkdir ' + Experiment_dir
+        cmd_mkdir = 'mkdir -p ' + Experiment_dir
         subprocess.call(cmd_mkdir, shell=True)
 
         for sn, sname in enumerate(SeqNameList):
