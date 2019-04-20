@@ -8,7 +8,7 @@ import signal
 # SeqNameList = ['room1_512_16', 'not_exist'];
 SeqNameList = ['room1_512_16', 'room2_512_16', 'room3_512_16', 'room4_512_16', 'room5_512_16', 'room6_512_16', 'not_exist'];
 
-Result_root = '/mnt/DATA/tmp/TUM_VI/SVO2_Stereo_Baseline/'
+Result_root = '/mnt/DATA/tmp/TUM_VI/SVO2_Mono_Baseline/'
 
 Number_GF_List = [400, 600, 800, 1000, 1500, 2000]; # [400]; # 
 
@@ -46,7 +46,7 @@ for ri, num_gf in enumerate(Number_GF_List):
             File_rosbag  = '/mnt/DATA/Datasets/TUM_VI/BagFiles/dataset-' + SeqName + '_small_chunks.bag'
 
             # rosrun ORB_SLAM2 Mono PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
-            cmd_slam   = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros tum_vi_stereo_only.launch ' \
+            cmd_slam   = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros tum_vi_mono_only.launch ' \
                 + 'num_tracks_per_frame:=' + str(int(num_gf)))
             cmd_timelog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
             cmd_tracklog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
