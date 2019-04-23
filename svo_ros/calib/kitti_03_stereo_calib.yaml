@@ -5,8 +5,8 @@ cameras:
     label: cam0
     id: 54812562fa109c40fe90b29a59dd7798
     line-delay-nanoseconds: 0
-    image_height: 376
-    image_width: 1241
+    image_height: 375
+    image_width: 1242
     type: pinhole
     intrinsics:
       cols: 1
@@ -29,8 +29,8 @@ cameras:
     label: cam1
     id: 54812562fa109c40fe90b29a59dd7723
     line-delay-nanoseconds: 0
-    image_height: 376
-    image_width: 1241
+    image_height: 375
+    image_width: 1242
     type: pinhole
 
     intrinsics:
