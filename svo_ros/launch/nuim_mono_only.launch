@@ -6,7 +6,7 @@
     <param name="imu_topic" value="/imu_null" type="str" />
     <param name="calib_file" value="$(find svo_ros)/calib/nuim_mono_calib.yaml" type="str" />
 
-    <rosparam file="$(find svo_ros)/param/mono_lmk$(arg num_tracks_per_frame).yaml" />
+    <rosparam file="$(find svo_ros)/param/vga_mono_lmk$(arg num_tracks_per_frame).yaml" />
     <rosparam file="$(find svo_ros)/param/euroc_mono_imu.yaml" />
 
   </node>

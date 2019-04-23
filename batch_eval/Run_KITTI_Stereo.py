@@ -5,12 +5,12 @@ import subprocess
 import time
 import signal
 
-SeqNameList = ['Seq00_stereo', 'Seq02_stereo', 'Seq05_stereo', 'Seq08_stereo'];
-SeqConfigPre = ['00_02', '00_02', '04_12', '04_12']
+SeqNameList = ['Seq00_stereo', 'Seq02_stereo', 'Seq05_stereo', 'Seq08_stereo', 'Seq01_stereo', 'Seq03_stereo', 'Seq04_stereo', 'Seq06_stereo', 'Seq07_stereo', 'Seq09_stereo', 'Seq10_stereo'];
+SeqConfigPre = ['00_02', '00_02', '04_12', '04_12', '00_02', '03', '04_12', '04_12', '04_12', '04_12', '04_12']
 
 Result_root = '/mnt/DATA/tmp/KITTI/SVO2_Stereo_Baseline/'
 
-Number_GF_List = [800]; # [400, 600, 800, 1000, 1500, 2000]; # 
+Number_GF_List = [1500]; # [400, 600, 800, 1000, 1500, 2000]; # 
 
 Num_Repeating = 10 # 20 #  5 # 
 SleepTime = 5
@@ -46,7 +46,7 @@ for ri, num_gf in enumerate(Number_GF_List):
             File_rosbag  = '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/' + SeqName + '.bag'
 
             # rosrun ORB_SLAM2 Mono PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
-            cmd_slam     = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.0 roslaunch svo_ros ' \
+            cmd_slam     = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros ' \
                 + ' kitti_stereo_only.launch num_tracks_per_frame:=' + str(int(num_gf))) \
                 + ' calib_prefix:=' + SeqConfigPre[sn]
             cmd_timelog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')

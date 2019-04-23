@@ -7,7 +7,7 @@
     <param name="imu_topic" value="/imu_null" type="str" />
     <param name="calib_file" value="$(find svo_ros)/calib/kitti_$(arg calib_prefix)_stereo_calib.yaml" type="str" />
 
-    <rosparam file="$(find svo_ros)/param/stereo_lmk$(arg num_tracks_per_frame).yaml" />
+    <rosparam file="$(find svo_ros)/param/kitti_stereo_lmk$(arg num_tracks_per_frame).yaml" />
     <rosparam file="$(find svo_ros)/param/kitti_stereo_imu.yaml" />
 
   </node>
