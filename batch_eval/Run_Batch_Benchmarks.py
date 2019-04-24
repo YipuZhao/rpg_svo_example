@@ -7,7 +7,7 @@ import signal
 
 SeqNameList = ['MH_05_difficult', 'V1_03_difficult', \
 'dataset-room3_512_16_small_chunks', 'dataset-magistrale6_512_16_small_chunks', 'dataset-outdoors4_512_16_small_chunks', \
-'Seq02', 'Seq04', '2019-01-25-17-30', \
+'Seq00_left', 'Seq04_left', '2019-01-25-17-30', \
 'left_cam', 'freiburg2_desk_with_person'
 ];
 CalibList   = ['euroc', 'euroc', 'tum_vi', 'tum_vi', 'tum_vi', \
@@ -17,12 +17,12 @@ CamConfigList = ['vga', 'vga', 'vga', 'vga', 'vga', \
 CamTopicList = ['/cam0/image_raw', '/cam0/image_raw', \
 '/cam0/image_raw', '/cam0/image_raw', '/cam0/image_raw', \
 '/camera/image_raw', '/camera/image_raw', '/left_cam/image_raw', \
-'/camera/image_raw', '/camera/image_raw'
+'/cam0/image_raw', '/camera/image_raw'
 ]
 SeqDirList = ['/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', '/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', \
 '/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', \
 '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Hololens/BagFiles/', \
-'/mnt/DATA/Datasets/New_College/BagFiles/', '/mnt/DATA/Datasets/TUM_RGBD/BagFiles'
+'/mnt/DATA/Datasets/New_College/BagFiles/', '/mnt/DATA/Datasets/TUM_RGBD/BagFiles/'
 ];
 # SeqNameList = ['2019-01-25-17-30_stereo'\
 # ];
