@@ -5,15 +5,34 @@ import subprocess
 import time
 import signal
 
-SeqNameList = ['Seq00_stereo', 'Seq02_stereo', 'Seq05_stereo', 'Seq08_stereo', 'Seq01_stereo', 'Seq03_stereo', 'Seq04_stereo', 'Seq06_stereo', 'Seq07_stereo', 'Seq09_stereo', 'Seq10_stereo'];
-SeqConfigPre = ['00_02', '00_02', '04_12', '04_12', '00_02', '03', '04_12', '04_12', '04_12', '04_12', '04_12']
+# SeqNameList = ['MH_05_difficult', 'V1_03_difficult', \
+# 'dataset-room3_512_16_small_chunks', 'dataset-magistrale6_512_16_small_chunks', 'dataset-outdoors4_512_16_small_chunks', \
+# 'Seq02', 'Seq04', '2019-01-25-17-30'\
+# ];
+# CalibList     = ['EuRoC', 'EuRoC', 'TUM_VI', 'TUM_VI', 'TUM_VI', \
+# 'Kitti', 'Kitti', 'Hololens'];
+# CamTopicList = ['/cam0/image_raw', '/cam0/image_raw', \
+# '/cam0/image_raw', '/cam0/image_raw', '/cam0/image_raw', \
+# '/camera/image_raw', '/camera/image_raw', '/left_cam/image_raw', \
+# ]
+# SeqDirList = ['/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', '/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', \
+# '/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', \
+# '/mnt/DATA/Datasets/Kitti/BagFiles/', '/mnt/DATA/Datasets/Kitti/BagFiles/', '/mnt/DATA/Datasets/Hololens/BagFiles/', \
+# ];
+SeqNameList = ['2019-01-25-17-30_stereo'\
+];
+CalibList   = ['NewCollege'];
+CamTopicList = ['/camera/image_raw', \
+]
+SeqDirList = ['/mnt/DATA/Datasets/Hololens/BagFiles/', \
+];
 
-Result_root = '/mnt/DATA/tmp/KITTI/SVO2_Stereo_Baseline/'
+Result_root = '/mnt/DATA/tmp/SVO_Mono_Baseline/'
 
-Number_GF_List = [1500]; # [400, 600, 800, 1000, 1500, 2000]; # 
+Number_GF_List = [800]; # 
 
-Num_Repeating = 10 # 20 #  5 # 
-SleepTime = 5
+Num_Repeating = 1 # 10 # 20 #  
+SleepTime = 3
 
 #----------------------------------------------------------------------------------------------------------------------
 class bcolors:
@@ -33,7 +52,7 @@ for ri, num_gf in enumerate(Number_GF_List):
     for iteration in range(0, Num_Repeating):
 
         Experiment_dir = Result_root + Experiment_prefix + '_Round' + str(iteration + 1)
-        cmd_mkdir = 'mkdir -p ' + Experiment_dir
+        cmd_mkdir = 'mkdir ' + Experiment_dir
         subprocess.call(cmd_mkdir, shell=True)
 
         for sn, sname in enumerate(SeqNameList):
@@ -43,7 +62,7 @@ for ri, num_gf in enumerate(Number_GF_List):
             SeqName = SeqNameList[sn] #+ '_blur_9'
             print bcolors.ALERT + "Round: " + str(iteration + 1) + "; Seq: " + SeqName
 
-            File_rosbag  = '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/' + SeqName + '.bag'
+            File_rosbag  = SeqDirList[sn] + SeqName + '.bag'
 
             # rosrun ORB_SLAM2 Mono PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
             cmd_slam     = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros ' \
@@ -51,7 +70,7 @@ for ri, num_gf in enumerate(Number_GF_List):
                 + ' calib_prefix:=' + SeqConfigPre[sn])
             cmd_timelog = str('cp /mnt/DATA/svo_tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
             cmd_tracklog = str('cp /mnt/DATA/svo_tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
-            cmd_rosbag = 'rosbag play ' + File_rosbag # + ' -u 30' # + ' -r 0.3'
+            cmd_rosbag = 'rosbag play ' + File_rosbag + ' -r 0.3'  # + ' -u 30' #
             print bcolors.WARNING + "cmd_slam: \n"   + cmd_slam   + bcolors.ENDC
             print bcolors.WARNING + "cmd_rosbag: \n" + cmd_rosbag + bcolors.ENDC
             print bcolors.WARNING + "cmd_timelog: \n" + cmd_timelog + bcolors.ENDC
@@ -68,6 +87,7 @@ for ri, num_gf in enumerate(Number_GF_List):
             proc_bag = subprocess.call(cmd_rosbag, shell=True)
 
             print bcolors.OKGREEN + "Finished rosbag playback, kill the process" + bcolors.ENDC
+            # subprocess.call('rosnode kill /rec_bag', shell=True)
             subprocess.call('rosnode kill /svo', shell=True)
             # subprocess.call('pkill roslaunch', shell=True)
             # subprocess.call('pkill svo_node', shell=True)
@@ -78,3 +98,5 @@ for ri, num_gf in enumerate(Number_GF_List):
             subprocess.call(cmd_timelog, shell=True)
             print bcolors.OKGREEN + "Copy the track to result folder" + bcolors.ENDC
             subprocess.call(cmd_tracklog, shell=True)
+
+            subprocess.call('pkill svo_node', shell=True)
