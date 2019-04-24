@@ -11,7 +11,7 @@ SeqNameList = ['MH_05_difficult', 'V1_03_difficult', \
 'left_cam', 'freiburg2_desk_with_person'
 ];
 CalibList   = ['euroc', 'euroc', 'tum_vi', 'tum_vi', 'tum_vi', \
-'kitti_00_02', 'kitti_04_12', 'hololens', 'newcollege', 'tum_freiburg2'];
+'kitti_00_02', 'kitti_04_12', 'hololens', 'newcollege', 'freiburg2'];
 CamConfigList = ['vga', 'vga', 'vga', 'vga', 'vga', \
 'kitti', 'kitti', 'vga', 'vga', 'vga']
 CamTopicList = ['/cam0/image_raw', '/cam0/image_raw', \
@@ -24,13 +24,12 @@ SeqDirList = ['/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', '/mnt/DATA/Datasets/
 '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Hololens/BagFiles/', \
 '/mnt/DATA/Datasets/New_College/BagFiles/', '/mnt/DATA/Datasets/TUM_RGBD/BagFiles/'
 ];
-# SeqNameList = ['2019-01-25-17-30_stereo'\
-# ];
-# CalibList     = ['Hololens'];
-# CamTopicList = ['/left_cam/image_raw', \
-# ]
-# SeqDirList = ['/mnt/DATA/Datasets/Hololens/BagFiles/', \
-# ];
+#
+# SeqNameList = ['freiburg2_desk_with_person'];
+# CalibList     = ['freiburg2'];
+# CamConfigList = ['vga']
+# CamTopicList = ['/camera/image_raw']
+# SeqDirList = ['/mnt/DATA/Datasets/TUM_RGBD/BagFiles/'];
 
 Result_root = '/mnt/DATA/tmp/SVO_Mono_Baseline_Slomo/'
 

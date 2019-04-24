@@ -16,8 +16,8 @@ cameras:
       type: radial-tangential
       parameters:
         cols: 1
-        rows: 5
-        data: [0.231222, -0.784899, -0.003257, -0.000105, 0.917205]
+        rows: 4
+        data: [0.231222, -0.784899, -0.003257, -0.000105]
   T_B_C:
     cols: 4
     rows: 4
