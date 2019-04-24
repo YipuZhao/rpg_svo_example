@@ -16,7 +16,7 @@ CamConfigList = ['vga', 'vga', 'vga', 'vga', 'vga', \
 'kitti', 'kitti', 'vga', 'vga', 'vga']
 CamTopicList = ['/cam0/image_raw', '/cam0/image_raw', \
 '/cam0/image_raw', '/cam0/image_raw', '/cam0/image_raw', \
-'/camera/image_raw', '/camera/image_raw', '/left_cam/image_raw', \
+'/left/image_raw', '/left/image_raw', '/left_cam/image_raw', \
 '/cam0/image_raw', '/camera/image_raw'
 ]
 SeqDirList = ['/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', '/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', \
@@ -32,11 +32,11 @@ SeqDirList = ['/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', '/mnt/DATA/Datasets/
 # SeqDirList = ['/mnt/DATA/Datasets/Hololens/BagFiles/', \
 # ];
 
-Result_root = '/mnt/DATA/tmp/SVO_Mono_Baseline/'
+Result_root = '/mnt/DATA/tmp/SVO_Mono_Baseline_Slomo/'
 
 Number_GF_List = [800]; # 
 
-Num_Repeating = 3 # 1 # 10 # 20 #  
+Num_Repeating = 1 # 10 # 20 #  3 # 
 SleepTime = 3
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ for ri, num_gf in enumerate(Number_GF_List):
     for iteration in range(0, Num_Repeating):
 
         Experiment_dir = Result_root + Experiment_prefix + '_Round' + str(iteration + 1)
-        cmd_mkdir = 'mkdir ' + Experiment_dir
+        cmd_mkdir = 'mkdir -p ' + Experiment_dir
         subprocess.call(cmd_mkdir, shell=True)
 
         for sn, sname in enumerate(SeqNameList):
@@ -72,7 +72,7 @@ for ri, num_gf in enumerate(Number_GF_List):
             # rosrun ORB_SLAM2 Mono PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
             cmd_slam     = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros ' \
                 + ' general_mono_only.launch num_tracks_per_frame:=' + str(int(num_gf)) \
-                + ' calib_prefix:=' + SeqConfigPre[sn] + ' cam_topic:=' + CamTopicList[sn] \
+                + ' calib_prefix:=' + CalibList[sn] + ' cam_topic:=' + CamTopicList[sn] \
                 + ' cam_config:=' + CamConfigList[sn])
             cmd_timelog = str('cp /mnt/DATA/svo_tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
             cmd_tracklog = str('cp /mnt/DATA/svo_tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
