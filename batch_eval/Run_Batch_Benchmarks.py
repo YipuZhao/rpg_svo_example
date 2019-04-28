@@ -24,10 +24,12 @@ import signal
 # '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Hololens/BagFiles/', \
 # '/mnt/DATA/Datasets/New_College/BagFiles/', '/mnt/DATA/Datasets/TUM_RGBD/BagFiles/'
 # ];
-SeqNameList = ['living_room_traj0n', 'office_room_traj3n', '2019-01-25-15-10'];
-CalibList   = ['nuim', 'nuim', 'hololens'];
-CamTopicList = ['/camera/image_raw', '/camera/image_raw', '/left_cam/image_raw']
-SeqDirList = ['/mnt/DATA/Datasets/ICL-NUIM_dataset/BagFiles/', '/mnt/DATA/Datasets/ICL-NUIM_dataset/BagFiles/', \
+SeqNameList = ['Seq02_left', 'Seq04_left', 'living_room_traj0n', 'office_room_traj3n', '2019-01-25-15-10'];
+CalibList   = ['kitti_00_02', 'kitti_04_12', 'nuim', 'nuim', 'hololens'];
+CamConfigList = ['kitti', 'kitti', 'vga', 'vga', 'vga'];
+CamTopicList = ['/left/image_raw', '/left/image_raw', '/camera/image_raw', '/camera/image_raw', '/left_cam/image_raw']
+SeqDirList = ['/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', \
+'/mnt/DATA/Datasets/ICL-NUIM_dataset/BagFiles/', '/mnt/DATA/Datasets/ICL-NUIM_dataset/BagFiles/', \
 '/mnt/DATA/Datasets/Hololens/BagFiles/'];
 
 Result_root = '/mnt/DATA/tmp/SVO_Mono_Baseline_Slomo/'
