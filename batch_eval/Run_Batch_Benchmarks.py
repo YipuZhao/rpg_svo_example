@@ -5,38 +5,36 @@ import subprocess
 import time
 import signal
 
-SeqNameList = ['MH_05_difficult', 'V1_03_difficult', \
-'dataset-room3_512_16_small_chunks', 'dataset-magistrale6_512_16_small_chunks', 'dataset-outdoors4_512_16_small_chunks', \
-'Seq00_left', 'Seq04_left', '2019-01-25-17-30', \
-'left_cam', 'freiburg2_desk_with_person'
-];
-CalibList   = ['euroc', 'euroc', 'tum_vi', 'tum_vi', 'tum_vi', \
-'kitti_00_02', 'kitti_04_12', 'hololens', 'newcollege', 'tum_freiburg2'];
-CamConfigList = ['vga', 'vga', 'vga', 'vga', 'vga', \
-'kitti', 'kitti', 'vga', 'vga', 'vga']
-CamTopicList = ['/cam0/image_raw', '/cam0/image_raw', \
-'/cam0/image_raw', '/cam0/image_raw', '/cam0/image_raw', \
-'/camera/image_raw', '/camera/image_raw', '/left_cam/image_raw', \
-'/cam0/image_raw', '/camera/image_raw'
-]
-SeqDirList = ['/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', '/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', \
-'/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', \
-'/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Hololens/BagFiles/', \
-'/mnt/DATA/Datasets/New_College/BagFiles/', '/mnt/DATA/Datasets/TUM_RGBD/BagFiles/'
-];
-# SeqNameList = ['2019-01-25-17-30_stereo'\
+# SeqNameList = ['MH_05_difficult', 'V1_03_difficult', \
+# 'dataset-room3_512_16_small_chunks', 'dataset-magistrale6_512_16_small_chunks', 'dataset-outdoors4_512_16_small_chunks', \
+# 'Seq00_left', 'Seq04_left', '2019-01-25-17-30', \
+# 'left_cam', 'freiburg2_desk_with_person'
 # ];
-# CalibList     = ['Hololens'];
-# CamTopicList = ['/left_cam/image_raw', \
+# CalibList   = ['euroc', 'euroc', 'tum_vi', 'tum_vi', 'tum_vi', \
+# 'kitti_00_02', 'kitti_04_12', 'hololens', 'newcollege', 'tum_freiburg2'];
+# CamConfigList = ['vga', 'vga', 'vga', 'vga', 'vga', \
+# 'kitti', 'kitti', 'vga', 'vga', 'vga']
+# CamTopicList = ['/cam0/image_raw', '/cam0/image_raw', \
+# '/cam0/image_raw', '/cam0/image_raw', '/cam0/image_raw', \
+# '/left_cam/image_raw', '/left_cam/image_raw', '/left_cam/image_raw', \
+# '/cam0/image_raw', '/camera/image_raw'
 # ]
-# SeqDirList = ['/mnt/DATA/Datasets/Hololens/BagFiles/', \
+# SeqDirList = ['/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', '/mnt/DATA/Datasets/EuRoC_dataset/BagFiles/', \
+# '/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', '/mnt/DATA/Datasets/TUM_VI/BagFiles/', \
+# '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Kitti_Dataset/BagFiles/', '/mnt/DATA/Datasets/Hololens/BagFiles/', \
+# '/mnt/DATA/Datasets/New_College/BagFiles/', '/mnt/DATA/Datasets/TUM_RGBD/BagFiles/'
 # ];
+SeqNameList = ['living_room_traj0n', 'office_room_traj3n', '2019-01-25-15-10'];
+CalibList   = ['nuim', 'nuim', 'hololens'];
+CamTopicList = ['/camera/image_raw', '/camera/image_raw', '/left_cam/image_raw']
+SeqDirList = ['/mnt/DATA/Datasets/ICL-NUIM_dataset/BagFiles/', '/mnt/DATA/Datasets/ICL-NUIM_dataset/BagFiles/', \
+'/mnt/DATA/Datasets/Hololens/BagFiles/'];
 
-Result_root = '/mnt/DATA/tmp/SVO_Mono_Baseline/'
+Result_root = '/mnt/DATA/tmp/SVO_Mono_Baseline_Slomo/'
 
 Number_GF_List = [800]; # 
 
-Num_Repeating = 3 # 1 # 10 # 20 #  
+Num_Repeating = 1 # 10 # 20 #  3 # 
 SleepTime = 3
 
 #----------------------------------------------------------------------------------------------------------------------
