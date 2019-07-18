@@ -66,6 +66,7 @@ for pi, rate in enumerate(Playback_Rate_List):
                 cmd_tracklog = str('cp /mnt/DATA/svo_tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
                 # cmd_timelog = str('cp /home/turtlebot/svo_install_overlay_ws/tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
                 cmd_rosbag = 'rosbag play ' + File_rosbag + ' -r ' + str(rate) # + ' -u 30' # 
+                
                 print bcolors.WARNING + "cmd_slam: \n"   + cmd_slam   + bcolors.ENDC
                 # print bcolors.WARNING + "cmd_record: \n" + cmd_record + bcolors.ENDC
                 print bcolors.WARNING + "cmd_lmklog: \n" + cmd_lmklog + bcolors.ENDC
