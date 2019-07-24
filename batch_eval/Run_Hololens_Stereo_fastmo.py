@@ -5,15 +5,14 @@ import subprocess
 import time
 import signal
 
-
-SeqStartTime = [60] 
-SeqDuration = [130]
-SeqNameList = ['2019-01-25-17-30_stereo'];
+# SeqStartTime = [60] 
+# SeqDuration = [130]
+# SeqNameList = ['2019-01-25-17-30_stereo'];
 
 # * Batch Eval
-# SeqStartTime = [0, 60, 230] 
-# SeqDuration = [300, 130, 999]
-# SeqNameList = ['2019-01-25-15-10_stereo', '2019-01-25-17-30_stereo', '2019-01-24-18-09_stereo'];
+SeqStartTime = [0, 60, 230] 
+SeqDuration = [300, 130, 999]
+SeqNameList = ['2019-01-25-15-10_stereo', '2019-01-25-17-30_stereo', '2019-01-24-18-09_stereo'];
 
 Result_root = '/mnt/DATA/tmp/Hololens/SVO2_Stereo_Speedx'
 

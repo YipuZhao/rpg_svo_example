@@ -36,7 +36,6 @@ cameras:
     image_height: 480
     image_width: 640
     type: pinhole
-
     intrinsics:
       cols: 1
       rows: 4
