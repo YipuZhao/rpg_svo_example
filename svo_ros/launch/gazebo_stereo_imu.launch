@@ -7,7 +7,7 @@
     <param name="imu_topic" value="/mobile_base/sensors/imu_data" type="str" />
     <param name="calib_file" value="$(find svo_ros)/calib/gazebo_stereo_calib.yaml" type="str" />
 
-    <rosparam file="$(find svo_ros)/param/pinhole_stereo_imu.yaml" />
+    <rosparam file="$(find svo_ros)/param/vga_stereo_lmk$(arg num_tracks_per_frame).yaml" />
     <rosparam file="$(find svo_ros)/param/gazebo_stereo_imu.yaml" />
 
   </node>

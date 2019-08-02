@@ -1,4 +1,4 @@
-# pipeline_is_stereo: True
+pipeline_is_stereo: True
 
 # grid_size: 35
 use_async_reprojectors: True
