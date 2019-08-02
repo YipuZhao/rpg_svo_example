@@ -46,12 +46,15 @@ for ri, num_gf in enumerate(Number_GF_List):
             File_rosbag  = '/mnt/DATA/Datasets/TUM_VI/BagFiles/dataset-' + SeqName + '_small_chunks.bag'
 
             # rosrun ORB_SLAM2 Mono PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
-            cmd_slam   = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.1 roslaunch svo_ros tum_vi_stereo_only.launch ' \
+            cmd_slam   = str('LD_PRELOAD=~/svo_install_ws/install/lib/libgflags.so.2.2.0 roslaunch svo_ros tum_vi_stereo_only.launch ' \
                 + 'num_tracks_per_frame:=' + str(int(num_gf)))
-            cmd_timelog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
-            cmd_tracklog = str('cp /home/yipuzhao/svo_install_overlay_ws/tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
-            cmd_rosbag = 'rosbag play ' + File_rosbag # + ' -u 30' # + ' -r 0.3'
+            cmd_lmklog   = str('cp /mnt/DATA/svo_tmpLog_lmk.txt ' + Experiment_dir + '/' + SeqName + '_Log_lmk.txt')
+            cmd_timelog  = str('cp /mnt/DATA/svo_tmpLog.txt ' + Experiment_dir + '/' + SeqName + '_Log.txt')
+            cmd_tracklog = str('cp /mnt/DATA/svo_tmpTrack.txt ' + Experiment_dir + '/' + SeqName + '_AllFrameTrajectory.txt')
+            cmd_rosbag = 'rosbag play ' + File_rosbag # + ' -r ' + str(rate) # + ' -u 20' 
+            
             print bcolors.WARNING + "cmd_slam: \n"   + cmd_slam   + bcolors.ENDC
+            print bcolors.WARNING + "cmd_lmklog: \n" + cmd_lmklog + bcolors.ENDC
             print bcolors.WARNING + "cmd_rosbag: \n" + cmd_rosbag + bcolors.ENDC
             print bcolors.WARNING + "cmd_timelog: \n" + cmd_timelog + bcolors.ENDC
             print bcolors.WARNING + "cmd_tracklog: \n" + cmd_tracklog + bcolors.ENDC
@@ -73,6 +76,8 @@ for ri, num_gf in enumerate(Number_GF_List):
 
             print bcolors.OKGREEN + "Sleeping for a few secs to wait for svo to quit" + bcolors.ENDC
             time.sleep(SleepTime)
+            print bcolors.OKGREEN + "Copy the lmk log to result folder" + bcolors.ENDC
+            subprocess.call(cmd_lmklog, shell=True)
             print bcolors.OKGREEN + "Copy the time log to result folder" + bcolors.ENDC
             subprocess.call(cmd_timelog, shell=True)
             print bcolors.OKGREEN + "Copy the track to result folder" + bcolors.ENDC

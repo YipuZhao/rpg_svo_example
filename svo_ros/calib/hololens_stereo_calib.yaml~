@@ -1,0 +1,75 @@
+label: "Hololens"
+id: 412eab8e4058621f7036b5e765dfe812
+cameras:
+- camera:
+    label: cam0
+    id: 54812562fa109c40fe90b29a59dd7798
+    line-delay-nanoseconds: 0
+    image_height: 640
+    image_width: 480
+    type: pinhole
+    intrinsics:
+      cols: 1
+      rows: 4
+      data: [4.4767500323141462e+02, 4.4404115802681559e+02, 2.3236536781584007e+02, 3.0342794208040090e+02]
+    distortion:
+      type: radial-tangential
+      parameters:
+        cols: 1
+        rows: 4
+        data: [ -4.5427022426629951e-02, 3.4668209885972245e-02,
+       -3.6142278415427251e-03, 1.0096272877164206e-02 ]
+  T_B_C:
+    cols: 4
+    rows: 4
+    data: [ 9.9981843212996180e-01, -1.9049075463815630e-02, -4.8528049504862475e-04, 0, 
+		1.9051449803929126e-02, 9.9980349712420769e-01, 5.4780834762549442e-03, 0,
+       		3.8083271049952488e-04, -5.4863341292985361e-03, 9.9998487743778819e-01, 0,
+		0, 0, 0, 1 ]
+
+- camera:
+    label: cam1
+    id: 54812562fa109c40fe90b29a59dd7723
+    line-delay-nanoseconds: 0
+    image_height: 640
+    image_width: 480
+    type: pinhole
+    intrinsics:
+      cols: 1
+      rows: 4
+      data: [4.4730127219036234e+02, 4.4308849509165213e+02, 2.2568014430851863e+02, 3.0278123605126456e+02]
+    distortion:
+      type: radial-tangential
+      parameters:
+        cols: 1
+        rows: 4
+        data: [ -2.1792249422819019e-02, -1.7541600012978668e-02,
+       -4.1915204442904697e-03, -1.2962821270625540e-02 ]
+  T_B_C:
+    cols: 4
+    rows: 4
+    data: [ 9.9981843212996180e-01, -1.9049075463815630e-02, -4.8528049504862475e-04, -0.11007784219, 
+		1.9051449803929126e-02, 9.9980349712420769e-01, 5.4780834762549442e-03, 0,
+       		3.8083271049952488e-04, -5.4863341292985361e-03, 9.9998487743778819e-01, 0,
+		0, 0, 0, 1 ]
+
+imu_params:
+  delay_imu_cam: 0.0
+  max_imu_delta_t: 0.01
+  acc_max: 176.0
+  omega_max: 7.8
+  sigma_omega_c: 12.0e-4
+  sigma_acc_c: 8.0e-3
+  sigma_omega_bias_c: 2.0e-5
+  sigma_acc_bias_c: 5.5e-5
+  sigma_integration: 0.0
+  g: 9.8082
+  imu_rate: 800
+
+imu_initialization:
+  velocity: [0.0, 0, 0.0]
+  omega_bias: [0.0, 0, 0.0]
+  acc_bias: [0.0, 0.0, 0.0]
+  velocity_sigma: 2.0
+  omega_bias_sigma: 0.01
+  acc_bias_sigma: 0.1
